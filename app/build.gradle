@@ -99,4 +99,9 @@ dependencies {
     testImplementation "androidx.room:room-testing:$room_version"
 
 
+    //support design snackbar
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:26.1.0'
+
+
 }

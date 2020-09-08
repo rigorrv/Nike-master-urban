@@ -1,7 +1,8 @@
 package com.github.nikeapp_master.ui
 
+import android.content.res.AssetFileDescriptor
+import android.media.MediaPlayer
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,11 +23,11 @@ class QueryFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        rootView = inflater.inflate(R.layout.query_fragment,container,false)
+        rootView = inflater.inflate(R.layout.query_fragment, container, false)
         return rootView
     }
 
-    fun loadQuery(queryList : Items, sortList : Boolean){
+    fun loadQuery(queryList: Items, sortList: Boolean){
         if (sortList) {
             var sort = queryList.list.sortedBy { it.thumbs_up  }
             rootView.queryRecyclerView.layoutManager =  LinearLayoutManager(activity)
@@ -48,7 +49,11 @@ class QueryFragment : Fragment() {
 
         lateinit var queryList : List<Items.Info>
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Adapter.ViewHolder {
-            val view : View = LayoutInflater.from(parent.context).inflate(R.layout.item_query,parent, false)
+            val view : View = LayoutInflater.from(parent.context).inflate(
+                R.layout.item_query,
+                parent,
+                false
+            )
             return ViewHolder(view)
         }
 
@@ -59,7 +64,7 @@ class QueryFragment : Fragment() {
         override fun getItemCount(): Int {
             return queryList.size
         }
-        class ViewHolder(view : View): RecyclerView.ViewHolder(view){
+        class ViewHolder(view: View): RecyclerView.ViewHolder(view){
 
             val TAG : String = "TAG"
             val author = itemView.author
@@ -75,10 +80,20 @@ class QueryFragment : Fragment() {
             val soundPlayer = itemView.soundPlayer
 
 
-            var myImageList = intArrayOf(R.drawable.icon_0001, R.drawable.icon_0002,R.drawable.icon_0003,R.drawable.icon_0004,R.drawable.icon_0005,R.drawable.icon_0006,R.drawable.icon_0007,R.drawable.icon_0008,R.drawable.icon_0009)
+            var myImageList = intArrayOf(
+                R.drawable.icon_0001,
+                R.drawable.icon_0002,
+                R.drawable.icon_0003,
+                R.drawable.icon_0004,
+                R.drawable.icon_0005,
+                R.drawable.icon_0006,
+                R.drawable.icon_0007,
+                R.drawable.icon_0008,
+                R.drawable.icon_0009
+            )
 
 
-            fun onBind(items : Items.Info){
+            fun onBind(items: Items.Info){
 
                 author.text = items.author
                 //defid.text = items.defid.toString()
@@ -95,7 +110,6 @@ class QueryFragment : Fragment() {
                 var randomImg = (0..8).random()
                 display.setBackgroundResource(myImageList[randomImg])
                 sound_urls.setOnClickListener {
-                    Log.d(TAG, "onBind: play sonund")
 
                 }
             }

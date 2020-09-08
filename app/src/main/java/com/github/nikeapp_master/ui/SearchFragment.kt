@@ -1,15 +1,19 @@
 package com.github.nikeapp_master.ui
 
+import android.R.attr.password
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import com.github.nikeapp_master.R
-import kotlinx.android.synthetic.main.activity_main.view.*
 import kotlinx.android.synthetic.main.search_view.*
 import kotlinx.android.synthetic.main.search_view.view.*
-import kotlinx.android.synthetic.main.search_view.view.searchBtn
+
 
 class SearchFragment : Fragment() {
 
@@ -21,11 +25,22 @@ class SearchFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         communicator = activity as Communicator
         rootView = inflater.inflate(R.layout.search_view, container, false)
         rootView.searchBtn.setOnClickListener {
+            imm.hideSoftInputFromWindow(view!!.getWindowToken(), 0)
             communicator.getQuery(tv_search.text.toString(), true)
         }
+
+        rootView.tv_search.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                communicator.getQuery(tv_search.text.toString(), true)
+                imm.hideSoftInputFromWindow(view!!.getWindowToken(), 0)
+                true
+            } else false
+        })
+
         rootView.toggleButton.setOnClickListener {
             sort = !sort
             if (tv_search.text.isEmpty())
