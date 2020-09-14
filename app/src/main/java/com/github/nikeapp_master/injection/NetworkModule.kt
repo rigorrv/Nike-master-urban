@@ -1,7 +1,8 @@
 package com.github.nikeapp_master.injection
 
-import android.content.Context
+import androidx.recyclerview.widget.RecyclerView
 import com.github.nikeapp_master.network.Api
+import com.github.nikeapp_master.ui.DefinitionAdapter
 import dagger.Module
 import dagger.Provides
 import dagger.Reusable
@@ -31,6 +32,13 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()
+    }
+
+    @Provides
+    @Reusable
+    @JvmStatic
+    internal fun recyclerView(recyclerView: RecyclerView) : DefinitionAdapter {
+        return recyclerView(recyclerView)
     }
 
 

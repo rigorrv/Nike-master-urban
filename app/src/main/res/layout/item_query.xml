@@ -13,6 +13,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/avatar_image"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="TextView"
+        android:text=""
         android:textColor="#000000"
         android:textColorLink="#FFFFFF"
         android:textStyle="bold"
@@ -37,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Rating:"
+        android:text="@string/rating"
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +64,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="TextView"
+        android:text=""
         android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +78,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Example:"
+        android:text="@string/example"
         android:textColor="#000000"
         android:textColorLink="#FFFFFF"
         android:textStyle="bold"
@@ -110,7 +111,7 @@
                 android:id="@+id/example"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text=""
                 android:textColor="#000000" />
 
             <TextView
@@ -118,78 +119,95 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="textEnd"
                 android:textColor="#33CCFF" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/thumbUpDisplay"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/thumb_up"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView2"
         app:srcCompat="@drawable/like" />
 
     <TextView
-        android:id="@+id/thumbs_up"
+        android:id="@+id/thumbsUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:text=""
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
+        app:layout_constraintBottom_toBottomOf="@+id/thumbUpDisplay"
+        app:layout_constraintStart_toEndOf="@+id/thumbUpDisplay"
+        app:layout_constraintTop_toTopOf="@+id/thumbUpDisplay" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/thumbDownDisplay"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintStart_toEndOf="@+id/thumbs_up"
-        app:layout_constraintTop_toTopOf="@+id/imageView4"
+        android:contentDescription="@string/thumb_down"
+        app:layout_constraintBottom_toBottomOf="@+id/thumbUpDisplay"
+        app:layout_constraintStart_toEndOf="@+id/thumbsUp"
+        app:layout_constraintTop_toTopOf="@+id/thumbUpDisplay"
         app:srcCompat="@drawable/dislike_sort" />
 
     <TextView
-        android:id="@+id/thumbs_down"
+        android:id="@+id/thumbsDown"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:text=""
         android:textColor="#000000"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+        app:layout_constraintBottom_toBottomOf="@+id/thumbDownDisplay"
+        app:layout_constraintStart_toEndOf="@+id/thumbDownDisplay"
+        app:layout_constraintTop_toTopOf="@+id/thumbDownDisplay" />
 
     <ImageView
-        android:id="@+id/sound_urls"
+        android:id="@+id/soundUrls"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginEnd="32dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        android:layout_marginEnd="16dp"
+        android:contentDescription="@string/sound_icon"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/thumbDownDisplay"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintTop_toTopOf="@+id/thumbDownDisplay"
         app:srcCompat="@drawable/speaker" />
 
     <TextView
-        android:id="@+id/written_on"
+        android:id="@+id/tracks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/_1_3_tracks"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/soundUrls"
+        app:layout_constraintEnd_toStartOf="@+id/soundUrls"
+        app:layout_constraintTop_toTopOf="@+id/soundUrls" />
+
+    <TextView
+        android:id="@+id/writtenOn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
-        android:text="TextView"
+        android:text=""
         android:textAlignment="textEnd"
         android:textColor="#4AB5D1"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/thumbDownDisplay" />
 
     <View
         android:id="@+id/view"
@@ -202,16 +220,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/written_on" />
+        app:layout_constraintTop_toBottomOf="@+id/writtenOn" />
 
-
-    <VideoView
-        android:id="@+id/soundPlayer"
-        android:layout_width="1dp"
-        android:layout_height="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

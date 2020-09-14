@@ -6,6 +6,38 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/errorFlagBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchBox">
+
+        <ImageView
+            android:id="@+id/errorFlag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/error_flag"
+            android:scaleType="fitStart"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_errorflag" />
+
+        <TextView
+            android:id="@+id/errorText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/sorry_but_we_didn_t_find_this_result"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/searchBox"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -20,75 +52,43 @@
 
         <ImageView
             android:id="@+id/logoOffline"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
+            android:contentDescription="@string/logo_offline"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/sound_Icon"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_logooffline" />
 
         <EditText
-            android:inputType="text"
-            android:lines="1"
-            android:imeOptions="actionDone"
             android:id="@+id/tv_search"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:hint="Search here"
-            android:shadowColor="#000000"
-            android:textColorHint="#FFFFFF"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="8dp"
+            android:autofillHints=""
+            android:hint="@string/search_here"
+            android:imeOptions="actionDone"
+            android:inputType="text"
 
+            android:lines="1"
             android:maxLines="1"
             android:minLines="1"
+
             android:nextFocusDown="@id/searchBtn"
 
+            android:shadowColor="#000000"
             android:singleLine="true"
-
+            android:textColorHint="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="@id/searchBox"
             app:layout_constraintEnd_toStartOf="@+id/searchBtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/searchBox" />
 
-
-        <LinearLayout
-            android:id="@+id/boxSort"
-            android:layout_width="37dp"
-            android:layout_height="37dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <ProgressBar
-                android:id="@+id/progressSort"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:indeterminateTint="#FB0093"
-                android:progressTint="#FFFFFF"
-                android:visibility="gone" />
-
-            <ToggleButton
-                android:id="@+id/toggleButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/ic_toggle"
-                android:checked="true"
-                android:text="ToggleButton"
-                android:textOff=" "
-                android:textOn=" "
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </LinearLayout>
 
         <Button
             android:id="@+id/searchBtn"
@@ -97,9 +97,74 @@
             android:layout_marginEnd="8dp"
             android:backgroundTint="#FF0BA4"
             android:shadowColor="#FD78BF"
-            android:text="Search"
-            app:layout_constraintEnd_toStartOf="@+id/boxSort"
+            android:text="@string/search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/sound_Icon"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/sound_Icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/sound_icon"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/boxSort"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/speaker" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/boxSort"
+            android:layout_width="37dp"
+            android:layout_height="37dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/sound_Error"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:contentDescription="@string/sound_icon"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/speaker" />
+
+            <ProgressBar
+                android:id="@+id/progressSort"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:indeterminateTint="#FB0093"
+                android:progressTint="#FFFFFF"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ToggleButton
+                android:id="@+id/toggleButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_toggle"
+                android:checked="true"
+                android:text="@string/togglebutton"
+                android:textOff=""
+                android:textOn=""
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.Guideline

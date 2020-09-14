@@ -9,7 +9,7 @@ import com.github.nikeapp_master.ui.PostViewModel
 
 abstract class MyViewModel : ViewModel(){
 
-    val injector : ViewModelInjector = DaggerViewModelInjector
+    private val injector : ViewModelInjector = DaggerViewModelInjector
         .builder()
         .networkModule(NetworkModule)
         .build()

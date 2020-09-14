@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">NikeApp-master</string>
+    <string name="offlineimage">offLineImage</string>
+    <string name="background">background</string>
+    <string name="search_edit_text">search edit text</string>
+    <string name="search_here">Search here</string>
+    <string name="logo_offline">logo offline</string>
+    <string name="togglebutton">ToggleButton</string>
+    <string name="search">Search</string>
+    <string name="avatar_image">avatar image</string>
+    <string name="rating">Rating:</string>
+    <string name="example">Example:</string>
+    <string name="_1_3_tracks">1/3 tracks</string>
+    <string name="thumb_up">thumb up</string>
+    <string name="thumb_down">thumb down</string>
+    <string name="sound_icon">sound icon</string>
+    <string name="sorry_but_we_didn_t_find_this_result">Sorry but We didn\'t find this result</string>
+    <string name="error_flag">error flag</string>
+    <string name="error_icon">error icon</string>
 </resources>

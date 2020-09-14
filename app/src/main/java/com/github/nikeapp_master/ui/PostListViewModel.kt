@@ -1,11 +1,10 @@
 package com.github.nikeapp_master.ui
 
-import android.util.Log
-import android.view.View
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.github.nikeapp_master.model.ItemTest
 import com.github.nikeapp_master.model.Items
-import com.github.nikeapp_master.model.SaveJson
 import com.github.nikeapp_master.network.Api
 import com.github.nikeapp_master.viewmodel.MyViewModel
 import com.google.gson.Gson
@@ -21,15 +20,19 @@ import java.io.IOException
 import javax.inject.Inject
 import kotlin.jvm.Throws
 
-class PostListViewModel() : MyViewModel() {
+class PostListViewModel : MyViewModel() {
+
     @Inject
     lateinit var api: Api
-    val TAG: String = "TAG"
     var queryLiveData = MutableLiveData<Items>()
-    var preLoading = MutableLiveData<Boolean>()
     var saveJsonLiveData = MutableLiveData<String>()
+    var preLoading = MutableLiveData<Boolean>()
     var offLineLiveData = MutableLiveData<Boolean>()
     var noSavedFile = MutableLiveData<Boolean>()
+    var errorLiveData = MutableLiveData<Boolean>()
+    //for test
+    var itemLiveData = MutableLiveData<ItemTest>()
+
 
     @Throws(InterruptedException::class, IOException::class)
     fun isConnected(): Boolean {
@@ -44,23 +47,24 @@ class PostListViewModel() : MyViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<Items> {
                     override fun onSubscribe(d: Disposable?) {
-                        preLoading.value = true
+                        setPreLoadingLiveData(true)
                     }
 
                     override fun onNext(t: Items?) {
-                        queryLiveData.value = t
-                        saveJsonLiveData.value =
-                            GsonBuilder().setPrettyPrinting().create().toJson(t)
+                        setErrorLiveData(true)
+                        setQueryLiveData(t!!)
+                        setSaveJsonLiveData(GsonBuilder().setPrettyPrinting().create().toJson(t))
                     }
 
                     override fun onError(e: Throwable?) {
-                        Log.d(TAG, "onError: ${e?.message.toString()}")
+                        setErrorLiveData(false)
                     }
 
                     override fun onComplete() {
-                        preLoading.value = false
-                        offLineLiveData.value = false
-                        noSavedFile.value = false
+                        setPreLoadingLiveData(false)
+                        setOffLineLiveData(false)
+                        setNoSavedMutableLiveData(false)
+
                     }
                 })
         } else {
@@ -68,53 +72,80 @@ class PostListViewModel() : MyViewModel() {
         }
     }
 
-
+    @SuppressLint("SdCardPath")
     private fun loadLocal() {
-        offLineLiveData.value = true
-        noSavedFile.value = false
+
+
+        setOffLineLiveData(true)
+        setNoSavedMutableLiveData(false)
+
         val gson = Gson()
         val fileName = "/data/data/com.github.nikeapp_master/files/codebeautify.json"
-        var file = File(fileName)
-        var fileExists = file.exists()
+        val file = File(fileName)
+        val fileExists = file.exists()
         if (fileExists) {
             try {
                 val br = BufferedReader(
                     FileReader("/data/data/com.github.nikeapp_master/files/codebeautify.json")
                 )
                 val obj: Items = gson.fromJson(br, Items::class.java)
-                queryLiveData.value = obj
-                noSavedFile.value = false
+                setQueryLiveData(obj)
+                setNoSavedMutableLiveData(false)
+
             } catch (e: IOException) {
                 e.printStackTrace()
             }
         } else {
-            Log.d(TAG, "loadLocal: $fileName doesn't exist")
-            noSavedFile.value = true
-
+            setNoSavedMutableLiveData(true)
         }
-
-
     }
 
+    fun setQueryLiveData(items: Items) {
+        queryLiveData.value = items
+    }
+
+    fun setSaveJsonLiveData(items: String) {
+        saveJsonLiveData.value = items
+    }
+
+    fun setPreLoadingLiveData(value: Boolean) {
+        preLoading.value = value
+    }
+
+    fun setOffLineLiveData(value: Boolean) {
+        offLineLiveData.value = value
+    }
+
+    fun setNoSavedMutableLiveData(data: Boolean) {
+        noSavedFile.value = data
+    }
+    fun setErrorLiveData(error: Boolean) {
+        errorLiveData.value = error
+    }
 
     fun getQueryLiveData(): LiveData<Items> {
         return queryLiveData
-    }
-
-    fun getPreLoadingLiveData(): LiveData<Boolean> {
-        return preLoading
     }
 
     fun getSaveJsonLiveData(): LiveData<String> {
         return saveJsonLiveData
     }
 
+    fun getPreLoadingLiveData(): LiveData<Boolean> {
+        return preLoading
+    }
+
     fun getOffLineLiveData(): LiveData<Boolean> {
         return offLineLiveData
     }
 
-    fun getNoSavedMutableLiveData () : LiveData<Boolean>{
+    fun getNoSavedMutableLiveData(): LiveData<Boolean> {
         return noSavedFile
     }
+
+    fun getErrorLiveData(): LiveData<Boolean> {
+        return errorLiveData
+    }
+
 
 }
