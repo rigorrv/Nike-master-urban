@@ -1,0 +1,10 @@
+Is using Urban Dictionary API
+I worked with MVVM, Retrofit, Rx, I used Ping security static headers in retrofit, 
+I saved the data in json format in cache.
+Is working with Recycler view and save the audio files in cache I created each folder for each word that we search
+Is playing the audio looking for the folder first that I create to save the audio a then looks for the audio, using a loop to repeat each audio
+I tested with mock and leak canary to check if has memory leaks
+Detect if we have connection in the mobile it is true load from the network if is not connection available load the las information that we search from the json saved in cache
+
+
+https://vimeo.com/461834909
